@@ -159,20 +159,14 @@ window.addEventListener('DOMContentLoaded', () => {
         "Our nearest celestial companion. \nIt pulls us as we pull it. \nWe relate to it as it relates to us.",
         style
     );
-    text.x = window.innerWidth/3;
-    text.y = window.innerHeight/3;
-    text.alpha = 0.1;
+    text.x = window.innerWidth/3 + window.innerWidth/20;
+    text.y = window.innerHeight;
+    text.alpha = 0.8;
 
     app.stage.addChild(text);
 
-    let elapsed = 0;
     app.ticker.add(() => {
-        elapsed += 1;
-        if (elapsed < 10)
-            text.alpha += 0.1;
-        if (elapsed > 100)
-            text.alpha -= 0.1;
-        console.log(elapsed);
+        text.y -= 2;
     });
 
 
