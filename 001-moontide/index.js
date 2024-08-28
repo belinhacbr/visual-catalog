@@ -13,9 +13,9 @@ const backgroundColor = '#140441';
 const mainColor = '#dced69';
 
 class Moon {
-    constructor(phase, moon_graphic) {
+    constructor(phase) {
       this.phase = phase;
-      this.graphic = moon_graphic;
+      this.graphic = new PIXI.Graphics();
     }
 
     update (x, y, radius){
@@ -116,8 +116,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             // Create moon instance
             let moon = new Moon(
-                phase,
-                new PIXI.Graphics()
+                phase
             );
             moon.update(x, y, radius);
             moons.push(moon);
@@ -159,14 +158,24 @@ window.addEventListener('DOMContentLoaded', () => {
         "Our nearest celestial companion. \nIt pulls us as we pull it. \nWe relate to it as it relates to us.",
         style
     );
-    text.x = window.innerWidth/3 + window.innerWidth/20;
+    text.x = 0 + window.innerWidth/50;
     text.y = window.innerHeight;
     text.alpha = 0.8;
 
+    let box = new PIXI.Graphics()
+    box.beginFill(backgroundColor, 0.80)
+    .drawRect(0, 0, window.innerWidth/4, window.innerHeight)
+    .endFill();
+
+    box.addChild(text);
+    app.stage.addChild(box);
     app.stage.addChild(text);
 
     app.ticker.add(() => {
         text.y -= 2;
+        if (text.y < -100) {
+            box.clear()
+        }
     });
 
 
