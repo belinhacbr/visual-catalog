@@ -104,8 +104,8 @@ window.addEventListener('DOMContentLoaded', () => {
     let phase = phases[0 % phases.length];
 
     // Draw entire screen
-    for (let i = 1; i <= rows; i++) {
-        for (let j = 1; j <= cols; j++) {
+    for (let i = 0; i <= rows; i++) {
+        for (let j = 0; j <= cols; j++) {
 
             // Tide maths
             const tideLevel = idx * 0.02;
@@ -142,40 +142,32 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // #Poetry
     const style = new PIXI.TextStyle({
-        fontFamily: "Georgia",
+        fontFamily: "Rasa",
         dropShadow: {
             color: backgroundColor,
             alpha: 0.8,
-            angle: 0.2,
+            angle: 0,
             blur: 4,
             distance: 100,
         },
         fill: mainColor,
+        stroke: backgroundColor,
+        strokeThickness: 2,
         wordWrap: true,
         wordWrapWidth: 440
     });
     const text = new PIXI.Text(
-        "Our nearest celestial companion. \nIt pulls us as we pull it. \nWe relate to it as it relates to us.",
+        "Our nearest celestial companion \nIt pulls us as we pull it \nWe relate to it as it relates to us",
         style
     );
     text.x = 0 + window.innerWidth/50;
     text.y = window.innerHeight;
     text.alpha = 0.8;
 
-    let box = new PIXI.Graphics()
-    box.beginFill(backgroundColor, 0.80)
-    .drawRect(0, 0, window.innerWidth/4, window.innerHeight)
-    .endFill();
-
-    box.addChild(text);
-    app.stage.addChild(box);
     app.stage.addChild(text);
 
     app.ticker.add(() => {
         text.y -= 2;
-        if (text.y < -100) {
-            box.clear()
-        }
     });
 
 
